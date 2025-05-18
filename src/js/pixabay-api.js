@@ -47,7 +47,6 @@ formEl.addEventListener('submit', e => {
 
 });
 
-
 function getImagesByQuery(query) {
        
     return Axios.get("https://pixabay.com/api/", {
