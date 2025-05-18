@@ -39,10 +39,10 @@ formEl.addEventListener('submit', e => {
         return;
     }
     clearGallery();
+
     showLoader();
 
-
-    getImagesByQuery(userValue).then(images => createGallery(images));
+    getImagesByQuery(userValue).then(images => createGallery(images);
     hideLoader();
 
 });
@@ -91,8 +91,8 @@ function createGallery(images) {
     galleryEl.innerHTML = images.map(
         ({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => `
       <li class="gallery-item">
-        <a href="${largeImageURL}" data-caption="Likes: ${likes} | Views: ${views} | Comments: ${comments} | Downloads: ${downloads}">
-          <img src="${webformatURL}" alt="${tags}" loading="lazy"/>
+        <a href="${largeImageURL}">
+          <img src="${webformatURL}" title="Likes: ${likes} | Views: ${views} | Comments: ${comments} | Downloads: ${downloads}" alt="${tags}" loading="lazy"/>
         </a>
       </li>`
     ).join('');
@@ -102,7 +102,7 @@ function createGallery(images) {
     console.log(document.querySelector('.gallery a')?.getAttribute('data-caption'));
 
     lightbox = new SimpleLightbox('.gallery a', {
-        captionsData: 'data-caption',
+        captionsData: 'title',
         captionDelay: 250,
         captionPosition: 'bottom',
     });
