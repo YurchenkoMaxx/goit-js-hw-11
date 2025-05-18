@@ -57,11 +57,11 @@
   border-radius: 8px;
 }
 
-.sl-caption {
+/* .sl-caption {
   display: block !important;
   opacity: 1 !important;
-  color: rgb(204, 24, 24);
-}
+  color: rgb(241, 243, 243);
+} */
 
 .loader.is-visible {
   display: block;

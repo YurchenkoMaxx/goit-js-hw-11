@@ -37,21 +37,21 @@ formEl.addEventListener('submit', e => {
       console.error('Помилка при завантаженні зображень:', error);
       hideLoader();
     });
+    userInput.value = '';
   });
   
 
 function createGallery(images) {
     galleryEl.innerHTML = images.map(
         ({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => `
-      <li class="gallery-item">
-        <a href="${largeImageURL}">
-
-          <img src="${webformatURL}"
-          alt="${tags}"
-          title="Likes: ${likes} | Views: ${views} | Comments: ${comments} | Downloads: ${downloads}"
-          />
+        <li class="gallery-item">
+        <a href="${largeImageURL}" alt="${tags}">
+        <img src="${webformatURL}"
+        alt="${tags}"
+        title="Likes: ${likes} | Views: ${views} | Comments: ${comments} | Downloads: ${downloads}"
+        />
         </a>
-      </li>`
+        </li>`
     ).join('');
 
 
