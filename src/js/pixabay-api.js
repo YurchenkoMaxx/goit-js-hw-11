@@ -91,7 +91,12 @@ function createGallery(images) {
         ({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => `
       <li class="gallery-item">
         <a href="${largeImageURL}">
-          <img src="${webformatURL}" title="Likes: ${likes} | Views: ${views} | Comments: ${comments} | Downloads: ${downloads}" alt="${tags}" loading="lazy"/>
+        
+          <img src="${webformatURL}"
+          title="Likes: ${likes} | Views: ${views} | Comments: ${comments} | Downloads: ${downloads}"
+          alt="${tags}"
+          loading="lazy"
+          />
         </a>
       </li>`
     ).join('');
