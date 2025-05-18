@@ -24,28 +24,35 @@ const userInput = document.querySelector('.input');
 
 
 formEl.addEventListener('submit', e => {
-    e.preventDefault();
+  e.preventDefault();
 
-    const userValue = userInput.value.trim();
+  const userValue = userInput.value.trim();
 
-    if (userValue.length === 0) {
-        iziToast.warning({
-            message: 'Будь ласка, введіть запит',
-            position: 'topRight',
-            backgroundColor: 'rgb(255, 0, 34)',
-            titleColor: 'white',
-            messageColor: 'white',
-        });
-        return;
-    }
-    clearGallery();
+  if (userValue.length === 0) {
+    iziToast.warning({
+      message: 'Будь ласка, введіть запит',
+      position: 'topRight',
+      backgroundColor: 'rgb(255, 0, 34)',
+      titleColor: 'white',
+      messageColor: 'white',
+    });
+    return;
+  }
+  clearGallery();
 
-    showLoader();
+  showLoader();
 
-    getImagesByQuery(userValue).then(images => createGallery(images);
+  getImagesByQuery(userValue).then(images => {
+    createGallery(images);
     hideLoader();
 
+  })
+  .catch (error => {
+    console.error('Помилка при завантаженні зображень:', error);
+    hideLoader();
+  });
 });
+
 
 function getImagesByQuery(query) {
        
@@ -91,11 +98,11 @@ function createGallery(images) {
         ({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => `
       <li class="gallery-item">
         <a href="${largeImageURL}">
-        
+
           <img src="${webformatURL}"
           title="Likes: ${likes} | Views: ${views} | Comments: ${comments} | Downloads: ${downloads}"
           alt="${tags}"
-          loading="lazy"
+
           />
         </a>
       </li>`
@@ -105,10 +112,12 @@ function createGallery(images) {
     if (lightbox) lightbox.destroy();
     console.log(document.querySelector('.gallery a')?.getAttribute('data-caption'));
 
-    lightbox = new SimpleLightbox('.gallery a', {
+  lightbox = new SimpleLightbox('.gallery a', {
+    captions: true,
         captionsData: 'title',
         captionDelay: 250,
-        captionPosition: 'bottom',
+      captionPosition: 'bottom',
+      captionClass: ''
     });
 
     lightbox.refresh();

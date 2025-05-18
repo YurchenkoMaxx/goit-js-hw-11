@@ -59,7 +59,7 @@
 .sl-caption {
   display: block !important;
   opacity: 1 !important;
-  color: white;
+  color: rgb(204, 24, 24);
 }
 .loader {
   display: none;
