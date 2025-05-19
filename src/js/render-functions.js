@@ -45,11 +45,17 @@ function createGallery(images) {
     galleryEl.innerHTML = images.map(
         ({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => `
         <li class="gallery-item">
-        <a href="${largeImageURL}" alt="${tags}">
+        <a href="${largeImageURL}" class ="image-container" alt="${tags}">
         <img src="${webformatURL}"
         alt="${tags}"
         title="Likes: ${likes} | Views: ${views} | Comments: ${comments} | Downloads: ${downloads}"
         />
+        <div class="info-overlay">
+                    <div class="info-item"><b>Likes</b>: ${likes}</div>
+                    <div class="info-item"><b>Views</b>: ${views}</div>
+                    <div class="info-item"><b>Comments</b>: ${comments}</div>
+                    <div class="info-item"><b>Downloads</b>: ${downloads}</div>
+                </div>  
         </a>
         </li>`
     ).join('');
