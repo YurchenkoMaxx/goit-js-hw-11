@@ -1,5 +1,5 @@
+import { handleFormSubmit } from './js/render-functions';
 
-import './js/pixabay-api';
-import './js/render-functions';
-
+const formEl = document.querySelector('.form');
+formEl.addEventListener('submit', handleFormSubmit);
 

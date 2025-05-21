@@ -28,7 +28,6 @@ export function getImagesByQuery(query) {
         }
 
         return res.data.hits.map(hit => {
-            console.log('hit:', hit);
             return {
                 webformatURL: hit.webformatURL,
                 largeImageURL: hit.largeImageURL,
