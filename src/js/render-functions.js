@@ -1,12 +1,7 @@
-import { getImagesByQuery } from './pixabay-api';
-import iziToast from 'izitoast';
-import 'izitoast/dist/css/iziToast.min.css';
 import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 
 const galleryEl = document.querySelector('.gallery');
-const formEl = document.querySelector('.form');
-const userInput = document.querySelector('.input');
 const loader = document.querySelector('.loader');
 
 let lightbox = new SimpleLightbox('.gallery a', {
@@ -16,42 +11,7 @@ let lightbox = new SimpleLightbox('.gallery a', {
   captionPosition: 'bottom',
 });
 
-
-
-export function handleFormSubmit(e) {
-  e.preventDefault();
-  const query = userInput.value.trim();
-
-  if (query === '') {
-    iziToast.warning({
-      message: 'Будь ласка, введіть запит',
-      position: 'topRight',
-      backgroundColor: 'rgb(255, 0, 34)',
-      titleColor: 'white',
-      messageColor: 'white',
-    });
-    return;
-  }
-
-  clearGallery();
-  showLoader();
-
-  getImagesByQuery(query)
-    .then(images => {
-      createGallery(images);
-      lightbox.refresh();
-    })
-    .catch(error => {
-      console.error('Помилка при завантаженні зображень:', error);
-    })
-    .finally(() => {
-      hideLoader();
-      userInput.value = '';
-    });
-}
-  
-
-function createGallery(images) {
+export function createGallery(images) {
   const markup = images.map(
     ({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => `
       <li class="gallery-item">
@@ -66,25 +26,20 @@ function createGallery(images) {
             <div class="info-item"><b>Downloads</b>: ${downloads}</div>
           </div>
         </a>
-      </li>`
-  ).join('');
+      </li>`).join('');
 
   galleryEl.innerHTML = markup;
+  lightbox.refresh();
 }
 
-
-
-function clearGallery() {
-    const galleryEl = document.querySelector('.gallery');
-    galleryEl.innerHTML = '';
+export function clearGallery() {
+  galleryEl.innerHTML = '';
 }
 
-function showLoader() {
-    const loader = document.querySelector('.loader');
-    loader.classList.add('is-visible');
+export function showLoader() {
+  loader.classList.add('is-visible');
 }
 
-function hideLoader() {
-    const loader = document.querySelector('.loader');
-    loader.classList.remove('is-visible');
+export function hideLoader() {
+  loader.classList.remove('is-visible');
 }
